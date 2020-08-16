@@ -7,7 +7,7 @@
  * Message : Format the information and compose message  posting to the group. (Based on Line Notify service here.)
 
 ## Block Diagram
-![block diagram](https://github.com/zylix666/Taiwan_Stock_Messenger/block_diagram.png "Block Diagram")
+![block diagram](https://github.com/zylix666/Taiwan_Stock_Messenger/blob/master/block_diagram.png "Block Diagram")
 
 ## How to run
 You can run by command, 
