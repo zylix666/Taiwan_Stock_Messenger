@@ -16,4 +16,4 @@ You can run by command,
 or put in the crontab in the system.
 
 ## Screenshot
-![Screen captured](https://github.com/zylix666/Taiwan_Stock_Messenger/blob/master/images/Screenshot.png "Screenshot")
+![Screen captured](https://github.com/zylix666/Taiwan_Stock_Messenger/blob/master/images/Screenshot.jpg "Screenshot")
