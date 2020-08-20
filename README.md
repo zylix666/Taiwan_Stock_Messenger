@@ -15,5 +15,9 @@ You can run by command,
 
 or put in the crontab in the system.
 
+## Utility
+Retrieve the stock number and company name and save it for future use.
+This is not the frequent running code.
+
 ## Screenshot
 ![Screen captured](https://github.com/zylix666/Taiwan_Stock_Messenger/blob/master/images/Screenshot.jpg "Screenshot")

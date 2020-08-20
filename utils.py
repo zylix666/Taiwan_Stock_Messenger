@@ -10,6 +10,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import csv
 
 # Get the all public company names from TWSE
 def getList():
@@ -23,38 +24,37 @@ def getList():
         data = []
         for col in row.find_all('td'):
             col.attrs = {}
-            data.append(col.text.strip().replace('\u3000', ''))
-        
+            data.append(col.text.strip().replace('\u3000', ' '))
         if len(data) == 1:
             pass # title 股票, 上市認購(售)權證, ...
         else:
-            all_companies.append(data)
+            all_companies.append(data[0])
+    #remove title
+    del all_companies[0]
     return all_companies
 
-def build_public_company_list():
-    all_companies = getList()
-    all_companies_df = pd.DataFrame(columns=all_companies[0])
-
-    for one_stock in all_companies[1:]:
-        to_append = pd.Series(one_stock, index=all_companies_df.columns)
-        all_companies_df = all_companies_df.append(to_append, ignore_index=True)
-    return all_companies_df
-
-def create_code_name_map(all_companies_df):
-    stock_code_name_dict = {}
-    code_and_name = all_companies_df.iloc[:,0]
-    for can in code_and_name:
-        idx = 0
-        for c in can:
-            if c.isdigit() or c.isalpha():
-                idx+=1
-            else:
-                break
-        print(idx)
-        #update dictionary
-        
+def build_stock_number_company_dictionary(intoFile = False):
+    stock_no_name_list = getList()
+    stock_no_name_dict = {} 
+    for one_stock in stock_no_name_list:
+        stock_number, company_name = one_stock.split(" ", 1) 
+        print("%s, %s", (stock_number, company_name))
+        stock_no_name_dict[stock_number] = company_name
+    if intoFile:
+        try:
+            with open("all_stocks.csv", 'w') as f:
+                for key, value in stock_no_name_dict.items():
+                    f.write("%s, %s\n"%(key, value))
+        except IOError:
+            print("I/O Error.")
+    return stock_no_name_dict
     
 if __name__=="__main__":
-    df = build_public_company_list()
-    df.to_csv("all_stocks.csv", index=False)
-    create_code_name_map(df)
+    stock_dict = build_stock_number_company_dictionary(True)
+    print(stock_dict)
+    with open('all_stocks.csv', mode='r') as infile:
+        reader = csv.reader(infile)
+        mydict = {rows[0]:rows[1] for rows in reader}
+    print(mydict)
+    #df.to_csv("all_stocks.csv", index=False)
+    #create_code_name_map(df)
