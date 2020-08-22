@@ -12,13 +12,14 @@ import logging
  
 from stock_history_retriever import Stock_history_retriever
 from Messenger_Line import Messenger_Line
+from utils import query_stock_company_names
 
 sys.path.append(".")
 
 if __name__ == "__main__":
     logger = logging.getLogger('logging_main.logging_core')
     stock_number_list = ["0050","2002", "2330"]
-    name_code = {"2002": "中鋼", "0050":"台灣50", "2330":"台積電"}
+    name_code = query_stock_company_names(stock_number_list)
 
     show_fields = ["close", "change"]
     stock_to_show_dict={}
