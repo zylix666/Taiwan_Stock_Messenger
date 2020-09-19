@@ -21,3 +21,7 @@ This is not the frequent running code.
 
 ## Screenshot
 ![Screen captured](https://github.com/zylix666/Taiwan_Stock_Messenger/blob/master/images/Screenshot.jpg "Screenshot")
+
+## Tool 
+A tool to config whick stocks to monitor and which fields to show. Will add external URL to show more detail in the future.
+![Screen captured](https://github.com/zylix666/Taiwan_Stock_Messenger/blob/master/images/menuconfig_example.png "Menuconfig")
