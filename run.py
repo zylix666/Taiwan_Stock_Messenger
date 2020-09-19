@@ -12,20 +12,19 @@ import sys
 from stock_history_retriever import Stock_history_retriever
 from Messenger_Line import Messenger_Line
 from utils import query_stock_company_names
+from utils import load_default_config
 
 sys.path.append(".")
 
 import logging
 logging.basicConfig(level=logging.DEBUG,
-    filename="TW_stock_log.txt", \
-    format='[%(asctime)s %(levelname)-8s] %(message)s', \
-	datefmt='%Y%m%d %H:%M:%S')
-
-
+                    filename="TW_stock_log.txt",
+                    format='[%(asctime)s %(levelname)-8s] %(message)s',
+                    datefmt='%Y%m%d %H:%M:%S')
 
 if __name__ == "__main__":
     logger = logging.getLogger(__name__)
-    stock_number_list = ["0050","2002", "2330"]
+    stock_number_list, show_fields, _ = load_default_config()
     name_code = query_stock_company_names(stock_number_list)
     logger.debug("Stock number and company name mapping loaded!")
 
