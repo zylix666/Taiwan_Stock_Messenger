@@ -16,8 +16,12 @@ class Stock_history_repos():
         self.pre_file_name = self.dir_path + "/Total_history_"
         self.post_file_name = ".csv"
         self.stock_history = self.__load_files()
-        
-    def __load_files(self):
+        self.repository_exist = True
+        if self.stock_history is None:
+            self.repository_exist = False
+            print(stock_number + " is not existed.")
+
+    def __load_files(self) -> object:
         full_name = self.pre_file_name \
                     + self.stock_number   \
                     + self.post_file_name
@@ -28,9 +32,16 @@ class Stock_history_repos():
             return df
         else:
             print("Cannot find the stock history file : %s"%full_name)
-            return
+            return None
         print("history file loaded.")
-        
+
+    def query_repository_exist(self):
+        return self.repository_exist
+
+    def refresh(self):
+        self.stock_history = self.__load_files()
+        self.repository_exist = True
+
     def get_last_record(self):
         return self.stock_history.iloc[-1, :]
 

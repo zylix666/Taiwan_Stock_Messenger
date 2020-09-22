@@ -25,6 +25,9 @@ class Stock_history_retriever():
         self.years = ["2020", "2019"]
         if load_hist:
             self.stock_hist_repos = Stock_history_repos(self.stock_number)
+            if not self.stock_hist_repos.query_repository_exist():
+                self.grab_two_years()
+                self.stock_hist_repos.refresh()
     
     def __month_delta(self, sd, ed):
         flag = True
@@ -97,7 +100,7 @@ class Stock_history_retriever():
 
     # Preprocess method only
     def grab_two_years(self):
-        print("Warning, this is pre-process methond only.")
+        print("Retrieving the history data of "+self.stock_number)
         
         df_list = []
         
